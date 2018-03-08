@@ -133,7 +133,24 @@ module.exports = (options) => {
 
     webpackConfig.module.rules.push({
       test: /\.scss$/,
-      use: ['style-loader', 'css-loader?importLoaders=1', 'postcss-loader?config=webpack/postcss.config.js', 'sass-loader']
+      use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: {
+                  path: 'webpack/postcss.config.js'
+                }
+              }
+            },
+            'sass-loader'
+          ]
     });
 
     webpackConfig.devServer = {
